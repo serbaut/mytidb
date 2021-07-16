@@ -1,6 +1,7 @@
 # mytidb
-In-process database/sql driver for tidb
+database/sql driver for embeded tidb using unistore
 
+* tidb 5.1.0
 * Storage path is /tmp/mytidb (tidb-server uses /tmp/tidb by default)
 * Status port is disabled
 * tidb log level is fatal
