@@ -39,7 +39,7 @@ func (d *mytidb) Open(dsn string) (driver.Conn, error) {
 		cfg := config.NewConfig()
 		cfg.Path = "/tmp/mytidb"
 		cfg.Status.ReportStatus = false
-		cfg.Log.Level = "error"
+		cfg.Log.Level = "fatal"
 		if host, sport, err := net.SplitHostPort(myCfg.Addr); err != nil {
 			onceErr = err
 			return

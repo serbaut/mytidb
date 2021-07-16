@@ -38,4 +38,3 @@ func TestDriver(t *testing.T) {
 	assert.Equal(t, "zz1", name)
 	assert.Equal(t, now, date)
 }
-test
