@@ -17,10 +17,11 @@ func TestDriver(t *testing.T) {
 	defer db.Close()
 
 	now := time.Now().UTC().Round(time.Millisecond)
-	var version string
-	err = db.QueryRow(`select version()`).Scan(&version)
+	var version, txnMode string
+	err = db.QueryRow(`select version(), @@tidb_txn_mode`).Scan(&version, &txnMode)
 	assert.NoError(t, err)
-	assert.Equal(t, "5.7.25-TiDB-None", version) // FIXME: is there some setup missing?
+	assert.Equal(t, "5.7.25-TiDB-None", version)
+	assert.Equal(t, "pessimistic", txnMode)
 
 	_, err = db.Exec(`drop table if exists foo`)
 	assert.NoError(t, err)

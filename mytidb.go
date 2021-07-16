@@ -13,6 +13,7 @@ import (
 	"github.com/pingcap/tidb/config"
 	"github.com/pingcap/tidb/server"
 	"github.com/pingcap/tidb/session"
+	"github.com/pingcap/tidb/sessionctx/variable"
 	kvstore "github.com/pingcap/tidb/store"
 	"github.com/pingcap/tidb/store/mockstore"
 	"github.com/pingcap/tidb/util/logutil"
@@ -59,6 +60,9 @@ func startTidb(dsn string) error {
 	if err != nil {
 		return err
 	}
+
+	variable.SetSysVar(variable.TiDBTxnMode, "pessimistic")
+
 	dom, err := session.BootstrapSession(storage)
 	if err != nil {
 		return err
